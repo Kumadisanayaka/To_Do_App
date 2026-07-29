@@ -32,9 +32,30 @@ function displayTasks() {
 
     tasks.forEach((task, index) => {
         taskList.innerHTML += `
-            <li>${task.text}</li>
+            <li>
+                <span>${task.text}</span>
+                <button onclick="deleteTask(${index})">Delete</button>
+                <button onclick="completedTask(${index})">Completed</button>
+            </li>
+            
         `;
 
     });
+}
+
+function completedTask(index) {
+    tasks[index].completed = true;
+
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+
+    displayTasks();
+}
+
+function deleteTask(index) {
+    tasks.splice(index,1);
+
+    localStorage.setItem("tasks",JSON.stringify(tasks));
+
+    displayTasks();
 }
 
