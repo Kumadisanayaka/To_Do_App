@@ -9,8 +9,11 @@ let allbtn = document.getElementById("allbtn");
 let pendingbtn = document.getElementById("pendingbtn");
 let completedbtn = document.getElementById("completedbtn");
 
-let editIndex = null;
+let totalCount = document.getElementById("totalCount");
+let pendingCount = document.getElementById("pendingCount");
+let completedCount = document.getElementById("completedCount");
 
+let editIndex = null;
 let currentFilter = "all";
 
 displayTasks();
@@ -132,6 +135,22 @@ function displayTasks() {
             </li>
         `;
     });
+
+    //task count
+
+    let total = tasks.length;
+
+    let pending = tasks.filter(task =>{
+        return task.completed === false;
+    }).length;
+
+    let completed = tasks.filter(task =>{
+        return task.completed === true;
+    }).length;
+
+    totalCount.textContent = `Total: ${total}`;
+    pendingCount.textContent = `Pending: ${pending}`;
+    completedCount.textContent = `Completed: ${completed}`;
 }
 
 function completedTask(id) {

@@ -119,6 +119,22 @@ h1 {
     color: #999;
 }
 
+.task-count {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.task-count span {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    background: #f5f5f5;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 500;
+}
 
 /*Responsive*/
 
