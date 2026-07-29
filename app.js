@@ -17,6 +17,10 @@ displayTasks();
 allbtn.addEventListener("click",function(){
     currentFilter = "all";
 
+    allbtn.classList.add("active");
+    pendingbtn.classList.remove("active");
+    completedbtn.classList.remove("active");
+
     displayTasks();
 
 });
@@ -24,11 +28,19 @@ allbtn.addEventListener("click",function(){
 pendingbtn.addEventListener("click",function(){
     currentFilter = "pending";
 
+    allbtn.classList.remove("active");
+    pendingbtn.classList.add("active");
+    completedbtn.classList.remove("active");
+
     displayTasks();
 });
 
 completedbtn.addEventListener("click",function(){
     currentFilter = "completed";
+
+    allbtn.classList.remove("active");
+    pendingbtn.classList.remove("active");
+    completedbtn.classList.add("active");
 
     displayTasks();
 });

@@ -58,3 +58,40 @@ h1 {
     background-color: #bbb;
 }
 
+.filter-buttons button:active{
+    background-color: #333;
+    color: white;
+}
+
+#taskList{
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+#taskList li{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background: #f4f4f4;
+    border-radius: 8px;
+}
+
+#taskList li span{
+    flex: 1;
+    font-size: 16px;
+}
+
+#taskList li button{
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#taskList li span.completed{
+    text-decoration: line-through;
+    opacity: 0.6;
+}
