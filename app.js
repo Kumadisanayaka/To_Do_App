@@ -3,6 +3,7 @@ let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let taskInput = document.getElementById("taskInput");
 let addbtn = document.getElementById("addbtn");
 let taskList = document.getElementById("taskList");
+let searchInput = document.getElementById("searchInput");
 
 let allbtn = document.getElementById("allbtn");
 let pendingbtn = document.getElementById("pendingbtn");
@@ -85,6 +86,7 @@ function displayTasks() {
 
     let filteredTasks = tasks;
 
+    // Status filter
     if (currentFilter === "pending") {
 
         filteredTasks = tasks.filter(task => {
@@ -96,9 +98,17 @@ function displayTasks() {
         filteredTasks = tasks.filter(task => {
             return task.completed === true;
         });
-
     }
 
+    // Search filter
+    let searchText = searchInput.value.toLowerCase();
+
+    filteredTasks = filteredTasks.filter(task => {
+        return task.text.toLowerCase().includes(searchText);
+    });
+
+
+    // Display
     filteredTasks.forEach(task => {
 
         taskList.innerHTML += `
@@ -158,5 +168,9 @@ function editTask(id) {
     addbtn.textContent = "Update";
 }
 
+searchInput.addEventListener("input",function(){
+
+    displayTasks();
+});
 
 
