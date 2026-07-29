@@ -1,3 +1,39 @@
-*{
-    
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+.todo-container {
+    width: 500px;
+    margin: 100px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+#taskInput {
+    flex: 1;
+    padding: 10px;
+}
+
+#addbtn {
+    padding: 10px 20px;
+}
+
+#taskList {
+    margin-top: 20px;
+    padding: 0;
 }
