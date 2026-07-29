@@ -4,9 +4,35 @@ let taskInput = document.getElementById("taskInput");
 let addbtn = document.getElementById("addbtn");
 let taskList = document.getElementById("taskList");
 
+let allbtn = document.getElementById("allbtn");
+let pendingbtn = document.getElementById("pendingbtn");
+let completedbtn = document.getElementById("completedbtn");
+
 let editIndex = null;
 
+let currentFilter = "all";
+
 displayTasks();
+
+allbtn.addEventListener("click",function(){
+    currentFilter = "all";
+
+    displayTasks();
+
+});
+
+pendingbtn.addEventListener("click",function(){
+    currentFilter = "pending";
+
+    displayTasks();
+});
+
+completedbtn.addEventListener("click",function(){
+    currentFilter = "completed";
+
+    displayTasks();
+});
+
 addbtn.addEventListener("click", function () {
 
     let taskText = taskInput.value.trim();
@@ -16,6 +42,7 @@ addbtn.addEventListener("click", function () {
     }
 
     let task = {
+        id: editIndex === null ? Date.now() : tasks[editIndex].id,
         text: taskText,
         completed: editIndex === null ? false : tasks[editIndex].completed
     };
@@ -41,26 +68,54 @@ addbtn.addEventListener("click", function () {
 });
 
 function displayTasks() {
+
     taskList.innerHTML = "";
 
-    tasks.forEach((task, index) => {
+    let filteredTasks = tasks;
+
+    if (currentFilter === "pending") {
+
+        filteredTasks = tasks.filter(task => {
+            return task.completed === false;
+        });
+
+    } else if (currentFilter === "completed") {
+
+        filteredTasks = tasks.filter(task => {
+            return task.completed === true;
+        });
+
+    }
+
+    filteredTasks.forEach(task => {
+
         taskList.innerHTML += `
             <li>
                 <span>
                     ${task.completed ? "✅" : "☐"}
                     ${task.text}
                 </span>
-                <button onclick="deleteTask(${index})">Delete</button>
-                <button onclick="completedTask(${index})">Completed</button>
-                <button onclick="editTask(${index})">Edit</button>
-            </li>
-            
-        `;
 
+                <button onclick="deleteTask(${task.id})">
+                    Delete
+                </button>
+
+                <button onclick="completedTask(${task.id})">
+                    ${task.completed ? "Undo" : "Complete"}
+                </button>
+
+                <button onclick="editTask(${task.id})">
+                    Edit
+                </button>
+            </li>
+        `;
     });
 }
 
-function completedTask(index) {
+function completedTask(id) {
+
+    let index = tasks.findIndex(task => task.id === id);
+
     tasks[index].completed = !tasks[index].completed;
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -68,15 +123,20 @@ function completedTask(index) {
     displayTasks();
 }
 
-function deleteTask(index) {
-    tasks.splice(index, 1);
+function deleteTask(id) {
+    let index = tasks.findIndex(task => task.id === id);
 
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    tasks.splice(index,1);
+
+    localStorage.setItem("tasks",JSON.stringify(tasks));
 
     displayTasks();
 }
 
-function editTask(index) {
+function editTask(id) {
+
+    let index = tasks.findIndex(task => task.id === id);
+
     let task = tasks[index];
 
     taskInput.value = task.text;
