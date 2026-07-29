@@ -37,3 +37,24 @@ h1 {
     margin-top: 20px;
     padding: 0;
 }
+
+.filter-buttons{
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.filter-buttons button{
+    padding: 8px 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ddd;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.5s;
+}
+
+.filter-buttons button:hover{
+    background-color: #bbb;
+}
+
